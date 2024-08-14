@@ -1,7 +1,9 @@
 # MathematicsGame
+The user should guess the result of math operations.   
+Example: 103 + 3 ?   
+The user types the answer and the system will check if the answer is right and continue.    
 
 Requirements<br/> 
-<br/>
 1. Math game containing the 4 basic operations<br/>
  2. The divisions should result on INTEGERS ONLY and dividends should go from 0 to 100. Example: The app shouldn't present the division 7/2 to the user, since it doesn't result in an integer.<br/>
  3. Users should be presented with a menu to choose an operation<br/>
