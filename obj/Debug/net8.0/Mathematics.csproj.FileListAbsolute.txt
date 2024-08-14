@@ -1,0 +1,14 @@
+C:\CsharpProjects\Mathematics\bin\Debug\net8.0\Mathematics.exe
+C:\CsharpProjects\Mathematics\bin\Debug\net8.0\Mathematics.deps.json
+C:\CsharpProjects\Mathematics\bin\Debug\net8.0\Mathematics.runtimeconfig.json
+C:\CsharpProjects\Mathematics\bin\Debug\net8.0\Mathematics.dll
+C:\CsharpProjects\Mathematics\bin\Debug\net8.0\Mathematics.pdb
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\Mathematics.GeneratedMSBuildEditorConfig.editorconfig
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\Mathematics.AssemblyInfoInputs.cache
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\Mathematics.AssemblyInfo.cs
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\Mathematics.csproj.CoreCompileInputs.cache
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\Mathematics.dll
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\refint\Mathematics.dll
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\Mathematics.pdb
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\Mathematics.genruntimeconfig.cache
+C:\CsharpProjects\Mathematics\obj\Debug\net8.0\ref\Mathematics.dll
