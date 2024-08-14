@@ -6,7 +6,6 @@ using System.Text.Json.Serialization;
 Random randomGenerator = new Random();
 ArrayList calculationResultHistory = new ArrayList();
 
-
 while (true)
 {
     int selection = 0;
@@ -19,7 +18,6 @@ while (true)
     Console.WriteLine("3 - Multiply");
     Console.WriteLine("4 - Divide");
     Console.WriteLine("0 - Exit");
-
 
     while (!validSelection)
     {
@@ -139,17 +137,9 @@ while (true)
             }
             Console.WriteLine("----------------------------");
         }
-
-
-
     }
 
 }
-
-Calculation res = CreateCalculation(Operation.Divide);
-
-Console.WriteLine(res.ToString());
-
 
 Calculation CreateCalculation(Operation operation, int difficulty = 1)
 {
@@ -247,7 +237,6 @@ Calculation Multiply(int maximumNumber)
 
 Calculation? Divide(int maximumNumber)
 {
-
     bool validDivision = false;
 
     Operation operation = Operation.Divide;
@@ -262,7 +251,6 @@ Calculation? Divide(int maximumNumber)
         {
             Calculation calculation = new Calculation(firstOperand, secondOperand, operation, result);
             return calculation;
-
         }
 
     }

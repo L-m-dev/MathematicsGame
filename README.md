@@ -8,7 +8,9 @@ Requirements<br/>
 4. Record previous games in a List and there should be an option in the menu for the user to visualize a history of previous games.<br/>
  5. Don't need to record results on a database. Once the program is closed the results will be deleted.<br/>
 
-Difficulty:
- - 1 - easy (maximum number is 20)
- - 2 - medium (maximum number is 100)
- - 3 - hard (maximum number is 500)
+Difficulty:  
+ - 1 - easy (maximum number is 20)  
+ - 2 - medium (maximum number is 100)  
+ - 3 - hard (maximum number is 500)  
+
+ The difficulty upper value of multiplication has been lowered by half (20 -> 10, 100 -> 50)    

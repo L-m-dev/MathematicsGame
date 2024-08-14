@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CsharpProjects\\Mathematics\\Mathematics.csproj": {}
+    "c:\\CsharpProjects\\Mathematics\\Mathematics.csproj": {}
   },
   "projects": {
-    "C:\\CsharpProjects\\Mathematics\\Mathematics.csproj": {
+    "c:\\CsharpProjects\\Mathematics\\Mathematics.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CsharpProjects\\Mathematics\\Mathematics.csproj",
+        "projectUniqueName": "c:\\CsharpProjects\\Mathematics\\Mathematics.csproj",
         "projectName": "Mathematics",
-        "projectPath": "C:\\CsharpProjects\\Mathematics\\Mathematics.csproj",
+        "projectPath": "c:\\CsharpProjects\\Mathematics\\Mathematics.csproj",
         "packagesPath": "C:\\Users\\Immortal\\.nuget\\packages\\",
-        "outputPath": "C:\\CsharpProjects\\Mathematics\\obj\\",
+        "outputPath": "c:\\CsharpProjects\\Mathematics\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Immortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
