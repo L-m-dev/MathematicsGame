@@ -5,11 +5,7 @@ using System.Text.Json.Serialization;
 
 Random randomGenerator = new Random();
 ArrayList calculationResultHistory = new ArrayList();
-//divisions without integer results should't be presented 
-//so we can use two methods: reverse the result and see if it's the same   
-// x = 7/2. Is 2 times x equals to 7?
-// or use decimals and truncation maybe? 
-// Example: is decimalNumber == truncatedDecimalNumber
+
 
 while(true){
     int selection = 0;
@@ -38,17 +34,18 @@ while(true){
         break;
     }
 
+    Console.WriteLine("You can type 'exit' to stop the program.");
     if(selection == 1){
         //plus
         while(true){
             Calculation calculation = CreateCalculation(Operation.Plus);
-            Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(Operation.Plus)} {calculation.SecondOperand} equals? \tType in the command line and press Enter.");
+            Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(Operation.Plus)} {calculation.SecondOperand} equals?");
             int result = Helper.GetIntegerFromWriteLine();
             if(result == calculation.Result){
                 calculationResultHistory.Add(calculation);
-                Console.WriteLine($"That's right, the result was {calculation.Result}");
+                Console.WriteLine($"YES, the result was {calculation.Result}");
             } else{
-                Console.WriteLine($"Incorrent, the result was {calculation.Result} ");
+                Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
         }
 
