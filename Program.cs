@@ -232,7 +232,7 @@ Calculation Minus(int maximumNumber)
 
 Calculation Multiply(int maximumNumber)
 {
-
+    maximumNumber = maximumNumber/2;
     int firstOperand = randomGenerator.Next(1, maximumNumber);
     int secondOperand = randomGenerator.Next(2, maximumNumber);
     int result = firstOperand * secondOperand;
