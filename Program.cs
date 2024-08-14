@@ -9,6 +9,7 @@ ArrayList calculationResultHistory = new ArrayList();
 while (true)
 {
     int selection = 0;
+    string? roundResult;
     bool validSelection = false;
 
     Console.WriteLine("---Math Game---");
@@ -17,12 +18,13 @@ while (true)
     Console.WriteLine("2 - Minus");
     Console.WriteLine("3 - Multiply");
     Console.WriteLine("4 - Divide");
+    Console.WriteLine("5 - Show Round History - Shows all the previous guesses");
     Console.WriteLine("0 - Exit");
 
     while (!validSelection)
     {
         int.TryParse(Console.ReadLine(), out selection);
-        if (selection >= 0 && selection <= 4)
+        if (selection >= 0 && selection <= 5)
         {
             validSelection = true;
         }
@@ -52,15 +54,22 @@ while (true)
             {
                 break;
             }
+
+
             if (userResult == calculation.Result)
             {
-                calculationResultHistory.Add(calculation);
+                roundResult = "Won";
                 Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
             }
             else
             {
+                roundResult = "Lost";
                 Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
+
+            calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
+                                        calculation.Result, userResult, roundResult, DateTime.Now));
+
             Console.WriteLine("----------------------------");
         }
 
@@ -79,13 +88,16 @@ while (true)
             }
             if (userResult == calculation.Result)
             {
-                calculationResultHistory.Add(calculation);
+                roundResult = "Won";
                 Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
             }
             else
             {
+                roundResult = "Lost";
                 Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
+            calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
+                                       calculation.Result, userResult, roundResult, DateTime.Now));
             Console.WriteLine("----------------------------");
         }
 
@@ -104,13 +116,16 @@ while (true)
             }
             if (userResult == calculation.Result)
             {
-                calculationResultHistory.Add(calculation);
+                roundResult = "Won";
                 Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
             }
             else
             {
+                roundResult = "Lost";
                 Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
+            calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
+                                       calculation.Result, userResult, roundResult, DateTime.Now));
             Console.WriteLine("----------------------------");
         }
     }
@@ -119,24 +134,46 @@ while (true)
         //divide
         while (true)
         {
+            try{
             Calculation calculation = CreateCalculation(Operation.Divide);
-            Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
-            int userResult = Helper.GetIntegerFromWriteLine();
-            if (userResult == 0)
-            {
-                break;
+
+                Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+                int userResult = Helper.GetIntegerFromWriteLine();
+                if (userResult == 0)
+                {
+                    break;
+                }
+                if (userResult == calculation.Result)
+                {
+                    roundResult = "Won";
+                    Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
+                }
+                else
+                {
+                    roundResult = "Lost";
+                    Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
+                }
+                calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
+                                           calculation.Result, userResult, roundResult, DateTime.Now));
+                Console.WriteLine("----------------------------");
             }
-            if (userResult == calculation.Result)
+            catch (Exception ex)
             {
-                calculationResultHistory.Add(calculation);
-                Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
+                Console.WriteLine(ex.Message);
             }
-            else
-            {
-                Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
-            }
-            Console.WriteLine("----------------------------");
         }
+
+    }
+    else if (selection == 5)
+    {
+        Console.WriteLine("Result History:");
+        foreach (CalculationGuessED calculationGuessED in calculationResultHistory)
+        {
+            Console.WriteLine($"Question: {calculationGuessED.FirstOperand} {Helper.GetOperationSymbol(calculationGuessED.Operation)} {calculationGuessED.SecondOperand} = {calculationGuessED.Result} \t / User guess: {calculationGuessED.UserGuess} \t/ Round Result: {calculationGuessED.RoundResult} \t/ Date: {calculationGuessED.CreatedAt}");
+
+        }
+        Console.WriteLine("Press Enter to continue.");
+        Console.ReadLine();
     }
 
 }
@@ -222,7 +259,7 @@ Calculation Minus(int maximumNumber)
 
 Calculation Multiply(int maximumNumber)
 {
-    maximumNumber = maximumNumber/2;
+    maximumNumber = maximumNumber / 2;
     int firstOperand = randomGenerator.Next(1, maximumNumber);
     int secondOperand = randomGenerator.Next(2, maximumNumber);
     int result = firstOperand * secondOperand;
@@ -243,7 +280,7 @@ Calculation? Divide(int maximumNumber)
 
     while (!validDivision)
     {
-        int firstOperand = randomGenerator.Next(1, maximumNumber);
+        int firstOperand = randomGenerator.Next(2, maximumNumber);
         int secondOperand = randomGenerator.Next(2, firstOperand);
         int result = firstOperand / secondOperand;
 
