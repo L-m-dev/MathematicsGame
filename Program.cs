@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 Random randomGenerator = new Random();
 ArrayList calculationResultHistory = new ArrayList();
+int difficulty = 1;
 
 while (true)
 {
@@ -19,12 +20,13 @@ while (true)
     Console.WriteLine("3 - Multiply");
     Console.WriteLine("4 - Divide");
     Console.WriteLine("5 - Show Round History - Shows all the previous guesses");
+    Console.WriteLine($"6 - Change Difficulty Level - Current Difficulty : {difficulty}");
     Console.WriteLine("0 - Exit");
 
     while (!validSelection)
     {
         int.TryParse(Console.ReadLine(), out selection);
-        if (selection >= 0 && selection <= 5)
+        if (selection >= 0 && selection <= 6)
         {
             validSelection = true;
         }
@@ -47,7 +49,7 @@ while (true)
         //plus
         while (true)
         {
-            Calculation calculation = CreateCalculation(Operation.Plus);
+            Calculation calculation = CreateCalculation(Operation.Plus, difficulty);
             Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
             int userResult = Helper.GetIntegerFromWriteLine();
             if (userResult == 0)
@@ -68,7 +70,7 @@ while (true)
             }
 
             calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                        calculation.Result, userResult, roundResult, DateTime.Now));
+                                        calculation.Result, userResult, roundResult, difficulty, DateTime.Now));
 
             Console.WriteLine("----------------------------");
         }
@@ -79,7 +81,7 @@ while (true)
         //subtraction
         while (true)
         {
-            Calculation calculation = CreateCalculation(Operation.Minus);
+            Calculation calculation = CreateCalculation(Operation.Minus, difficulty);
             Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
             int userResult = Helper.GetIntegerFromWriteLine();
             if (userResult == 0)
@@ -97,7 +99,7 @@ while (true)
                 Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
             calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                       calculation.Result, userResult, roundResult, DateTime.Now));
+                                       calculation.Result, userResult, roundResult, difficulty, DateTime.Now));
             Console.WriteLine("----------------------------");
         }
 
@@ -107,7 +109,7 @@ while (true)
         //multiply
         while (true)
         {
-            Calculation calculation = CreateCalculation(Operation.Multiply);
+            Calculation calculation = CreateCalculation(Operation.Multiply, difficulty);
             Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
             int userResult = Helper.GetIntegerFromWriteLine();
             if (userResult == 0)
@@ -125,7 +127,7 @@ while (true)
                 Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
             calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                       calculation.Result, userResult, roundResult, DateTime.Now));
+                                       calculation.Result, userResult, roundResult, difficulty, DateTime.Now));
             Console.WriteLine("----------------------------");
         }
     }
@@ -135,7 +137,7 @@ while (true)
         while (true)
         {
             try{
-            Calculation calculation = CreateCalculation(Operation.Divide);
+            Calculation calculation = CreateCalculation(Operation.Divide, difficulty);
 
                 Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
                 int userResult = Helper.GetIntegerFromWriteLine();
@@ -154,7 +156,7 @@ while (true)
                     Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
                 }
                 calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                           calculation.Result, userResult, roundResult, DateTime.Now));
+                                           calculation.Result, userResult, roundResult, difficulty, DateTime.Now));
                 Console.WriteLine("----------------------------");
             }
             catch (Exception ex)
@@ -169,11 +171,24 @@ while (true)
         Console.WriteLine("Result History:");
         foreach (CalculationGuessED calculationGuessED in calculationResultHistory)
         {
-            Console.WriteLine($"Question: {calculationGuessED.FirstOperand} {Helper.GetOperationSymbol(calculationGuessED.Operation)} {calculationGuessED.SecondOperand} = {calculationGuessED.Result} \t / User guess: {calculationGuessED.UserGuess} \t/ Round Result: {calculationGuessED.RoundResult} \t/ Date: {calculationGuessED.CreatedAt}");
+            Console.WriteLine($"Question: {calculationGuessED.FirstOperand} {Helper.GetOperationSymbol(calculationGuessED.Operation)} {calculationGuessED.SecondOperand} = {calculationGuessED.Result} \t / User guess: {calculationGuessED.UserGuess} \t/ Round Result: {calculationGuessED.RoundResult} / Difficulty: {calculationGuessED.Difficulty} \t/ Date: {calculationGuessED.CreatedAt}");
 
         }
         Console.WriteLine("Press Enter to continue.");
         Console.ReadLine();
+    }
+    else if (selection == 6){
+        int diffChoice = 0;
+        Console.WriteLine($"Current Difficulty Level: {difficulty}");
+        Console.WriteLine("Type new Difficulty Level: \n 1 - Easy (Maximum number is 20) \n 2 - Medium (Maximum number is 100) \n 3 - Hard (Maximum number is 500)");
+        bool validDifficulty = Int32.TryParse(Console.ReadLine(), out diffChoice);
+        if(validDifficulty && diffChoice>0 && diffChoice<=3){
+            difficulty = diffChoice;
+            Console.WriteLine($"Difficulty modified. New: {difficulty}");
+         } else{
+            Console.WriteLine("Error. Invalid number.");
+         } 
+
     }
 
 }
