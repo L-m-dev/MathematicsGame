@@ -7,7 +7,8 @@ Random randomGenerator = new Random();
 ArrayList calculationResultHistory = new ArrayList();
 
 
-while(true){
+while (true)
+{
     int selection = 0;
     bool validSelection = false;
 
@@ -18,61 +19,155 @@ while(true){
     Console.WriteLine("3 - Multiply");
     Console.WriteLine("4 - Divide");
     Console.WriteLine("0 - Exit");
-    
-    
-    while(!validSelection){
-    int.TryParse(Console.ReadLine(), out selection);
-    if(selection >= 0 && selection <=4){
-        validSelection = true;
-    } else{
-        throw new ArgumentOutOfRangeException("Invalid choice. Should use one of the provided options.");
-    }
 
-    }
-    
-    if(selection == 0){
-        break;
-    }
 
-    Console.WriteLine("You can type 'exit' to stop the program.");
-    if(selection == 1){
-        //plus
-        while(true){
-            Calculation calculation = CreateCalculation(Operation.Plus);
-            Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(Operation.Plus)} {calculation.SecondOperand} equals?");
-            int result = Helper.GetIntegerFromWriteLine();
-            if(result == calculation.Result){
-                calculationResultHistory.Add(calculation);
-                Console.WriteLine($"YES, the result was {calculation.Result}");
-            } else{
-                Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
-            }
+    while (!validSelection)
+    {
+        int.TryParse(Console.ReadLine(), out selection);
+        if (selection >= 0 && selection <= 4)
+        {
+            validSelection = true;
+        }
+        else
+        {
+            throw new ArgumentOutOfRangeException("Invalid choice. Should use one of the provided options.");
         }
 
     }
 
+    if (selection == 0)
+    {
+        break;
+    }
+
+    Console.WriteLine("You can type 0 to go back to the Main Menu.");
+
+    if (selection == 1)
+    {
+        //plus
+        while (true)
+        {
+            Calculation calculation = CreateCalculation(Operation.Plus);
+            Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+            int userResult = Helper.GetIntegerFromWriteLine();
+            if (userResult == 0)
+            {
+                break;
+            }
+            if (userResult == calculation.Result)
+            {
+                calculationResultHistory.Add(calculation);
+                Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
+            }
+            else
+            {
+                Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
+            }
+            Console.WriteLine("----------------------------");
+        }
+
+    }
+    else if (selection == 2)
+    {
+        //subtraction
+        while (true)
+        {
+            Calculation calculation = CreateCalculation(Operation.Minus);
+            Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+            int userResult = Helper.GetIntegerFromWriteLine();
+            if (userResult == 0)
+            {
+                break;
+            }
+            if (userResult == calculation.Result)
+            {
+                calculationResultHistory.Add(calculation);
+                Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
+            }
+            else
+            {
+                Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
+            }
+            Console.WriteLine("----------------------------");
+        }
+
+    }
+    else if (selection == 3)
+    {
+        //multiply
+        while (true)
+        {
+            Calculation calculation = CreateCalculation(Operation.Multiply);
+            Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+            int userResult = Helper.GetIntegerFromWriteLine();
+            if (userResult == 0)
+            {
+                break;
+            }
+            if (userResult == calculation.Result)
+            {
+                calculationResultHistory.Add(calculation);
+                Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
+            }
+            else
+            {
+                Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
+            }
+            Console.WriteLine("----------------------------");
+        }
+    }
+    else if (selection == 4)
+    {
+        //divide
+        while (true)
+        {
+            Calculation calculation = CreateCalculation(Operation.Divide);
+            Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+            int userResult = Helper.GetIntegerFromWriteLine();
+            if (userResult == 0)
+            {
+                break;
+            }
+            if (userResult == calculation.Result)
+            {
+                calculationResultHistory.Add(calculation);
+                Console.WriteLine($"CONGRATULATIONS!!! the result was {calculation.Result}");
+            }
+            else
+            {
+                Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
+            }
+            Console.WriteLine("----------------------------");
+        }
+
+
+
+    }
 
 }
 
 Calculation res = CreateCalculation(Operation.Divide);
 
 Console.WriteLine(res.ToString());
- 
- //difficulty: 1 - easy (maximum number is 20)
- //difficulty: 2 - medium (maximum number is 100)
- //difficulty: 3 - hard (maximum number is 500)
+
+
 Calculation CreateCalculation(Operation operation, int difficulty = 1)
 {
     int maximumNumber = 0;
 
-    if(difficulty == 1){
+    if (difficulty == 1)
+    {
         maximumNumber = 20;
-    } else if(difficulty == 2){
+    }
+    else if (difficulty == 2)
+    {
         maximumNumber = 100;
-    } else if(difficulty == 3){
+    }
+    else if (difficulty == 3)
+    {
         maximumNumber = 500;
     }
- 
+
     Calculation calculation;
     switch (operation)
     {
@@ -100,7 +195,7 @@ Calculation CreateCalculation(Operation operation, int difficulty = 1)
         default:
             break;
     }
-    
+
     throw new InvalidOperationException("Invalid operation. Can only be + - * /");
 
 }
@@ -160,7 +255,7 @@ Calculation? Divide(int maximumNumber)
     while (!validDivision)
     {
         int firstOperand = randomGenerator.Next(1, maximumNumber);
-        int secondOperand = randomGenerator.Next(1, firstOperand);
+        int secondOperand = randomGenerator.Next(2, firstOperand);
         int result = firstOperand / secondOperand;
 
         if (result * secondOperand == firstOperand)
