@@ -54,7 +54,7 @@ while (true)
             Calculation calculation = CreateCalculation(Operation.Plus, difficulty);
 
             Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
-             stopwatch.Reset();
+            stopwatch.Reset();
             stopwatch.Start();
             int userResult = Helper.GetIntegerFromWriteLine();
             stopwatch.Stop();
@@ -91,7 +91,7 @@ while (true)
         {
             Calculation calculation = CreateCalculation(Operation.Minus, difficulty);
             Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
-             stopwatch.Reset();
+            stopwatch.Reset();
             stopwatch.Start();
             int userResult = Helper.GetIntegerFromWriteLine();
             stopwatch.Stop();
@@ -143,7 +143,7 @@ while (true)
                 Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
             calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                       calculation.Result, userResult, roundResult,elapsedTime, difficulty, DateTime.Now));
+                                       calculation.Result, userResult, roundResult, elapsedTime, difficulty, DateTime.Now));
             Console.WriteLine("----------------------------");
         }
     }
@@ -152,15 +152,16 @@ while (true)
         //divide
         while (true)
         {
-            try{
-            Calculation calculation = CreateCalculation(Operation.Divide, difficulty);
+            try
+            {
+                Calculation calculation = CreateCalculation(Operation.Divide, difficulty);
 
                 Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
-                 stopwatch.Reset();
-            stopwatch.Start();
+                stopwatch.Reset();
+                stopwatch.Start();
                 int userResult = Helper.GetIntegerFromWriteLine();
-                 stopwatch.Stop();
-            double elapsedTime = (stopwatch.Elapsed.TotalSeconds * 1000) / 1000;
+                stopwatch.Stop();
+                double elapsedTime = (stopwatch.Elapsed.TotalSeconds * 1000) / 1000;
                 if (userResult == 0)
                 {
                     break;
@@ -197,17 +198,21 @@ while (true)
         Console.WriteLine("Press Enter to continue.");
         Console.ReadLine();
     }
-    else if (selection == 6){
+    else if (selection == 6)
+    {
         int diffChoice = 0;
         Console.WriteLine($"Current Difficulty Level: {difficulty}");
         Console.WriteLine("Type new Difficulty Level: \n 1 - Easy (Maximum number is 20) \n 2 - Medium (Maximum number is 100) \n 3 - Hard (Maximum number is 500)");
         bool validDifficulty = Int32.TryParse(Console.ReadLine(), out diffChoice);
-        if(validDifficulty && diffChoice>0 && diffChoice<=3){
+        if (validDifficulty && diffChoice > 0 && diffChoice <= 3)
+        {
             difficulty = diffChoice;
             Console.WriteLine($"Difficulty modified. New: {difficulty}");
-         } else{
+        }
+        else
+        {
             Console.WriteLine("Error. Invalid number.");
-         } 
+        }
 
     }
 
