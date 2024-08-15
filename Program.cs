@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Numerics;
 using System.Text.Json.Serialization;
@@ -6,6 +7,7 @@ using System.Text.Json.Serialization;
 Random randomGenerator = new Random();
 ArrayList calculationResultHistory = new ArrayList();
 int difficulty = 1;
+Stopwatch stopwatch = new();
 
 while (true)
 {
@@ -50,8 +52,14 @@ while (true)
         while (true)
         {
             Calculation calculation = CreateCalculation(Operation.Plus, difficulty);
+
             Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+             stopwatch.Reset();
+            stopwatch.Start();
             int userResult = Helper.GetIntegerFromWriteLine();
+            stopwatch.Stop();
+            double elapsedTime = (stopwatch.Elapsed.TotalSeconds * 1000) / 1000;
+
             if (userResult == 0)
             {
                 break;
@@ -70,7 +78,7 @@ while (true)
             }
 
             calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                        calculation.Result, userResult, roundResult, difficulty, DateTime.Now));
+                                        calculation.Result, userResult, roundResult, elapsedTime, difficulty, DateTime.Now));
 
             Console.WriteLine("----------------------------");
         }
@@ -83,7 +91,11 @@ while (true)
         {
             Calculation calculation = CreateCalculation(Operation.Minus, difficulty);
             Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+             stopwatch.Reset();
+            stopwatch.Start();
             int userResult = Helper.GetIntegerFromWriteLine();
+            stopwatch.Stop();
+            double elapsedTime = (stopwatch.Elapsed.TotalSeconds * 1000) / 1000;
             if (userResult == 0)
             {
                 break;
@@ -99,7 +111,7 @@ while (true)
                 Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
             calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                       calculation.Result, userResult, roundResult, difficulty, DateTime.Now));
+                                       calculation.Result, userResult, roundResult, elapsedTime, difficulty, DateTime.Now));
             Console.WriteLine("----------------------------");
         }
 
@@ -111,7 +123,11 @@ while (true)
         {
             Calculation calculation = CreateCalculation(Operation.Multiply, difficulty);
             Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+            stopwatch.Reset();
+            stopwatch.Start();
             int userResult = Helper.GetIntegerFromWriteLine();
+            stopwatch.Stop();
+            double elapsedTime = (stopwatch.Elapsed.TotalSeconds * 1000) / 1000;
             if (userResult == 0)
             {
                 break;
@@ -127,7 +143,7 @@ while (true)
                 Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
             }
             calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                       calculation.Result, userResult, roundResult, difficulty, DateTime.Now));
+                                       calculation.Result, userResult, roundResult,elapsedTime, difficulty, DateTime.Now));
             Console.WriteLine("----------------------------");
         }
     }
@@ -140,7 +156,11 @@ while (true)
             Calculation calculation = CreateCalculation(Operation.Divide, difficulty);
 
                 Console.WriteLine($"{calculation.FirstOperand} {Helper.GetOperationSymbol(calculation.Operation)} {calculation.SecondOperand} equals?");
+                 stopwatch.Reset();
+            stopwatch.Start();
                 int userResult = Helper.GetIntegerFromWriteLine();
+                 stopwatch.Stop();
+            double elapsedTime = (stopwatch.Elapsed.TotalSeconds * 1000) / 1000;
                 if (userResult == 0)
                 {
                     break;
@@ -156,7 +176,7 @@ while (true)
                     Console.WriteLine($"Incorrect, the result was {calculation.Result} ");
                 }
                 calculationResultHistory.Add(new CalculationGuessED(calculation.FirstOperand, calculation.SecondOperand, calculation.Operation,
-                                           calculation.Result, userResult, roundResult, difficulty, DateTime.Now));
+                                           calculation.Result, userResult, roundResult, elapsedTime, difficulty, DateTime.Now));
                 Console.WriteLine("----------------------------");
             }
             catch (Exception ex)
@@ -171,7 +191,7 @@ while (true)
         Console.WriteLine("Result History:");
         foreach (CalculationGuessED calculationGuessED in calculationResultHistory)
         {
-            Console.WriteLine($"Question: {calculationGuessED.FirstOperand} {Helper.GetOperationSymbol(calculationGuessED.Operation)} {calculationGuessED.SecondOperand} = {calculationGuessED.Result} \t / User guess: {calculationGuessED.UserGuess} \t/ Round Result: {calculationGuessED.RoundResult} / Difficulty: {calculationGuessED.Difficulty} \t/ Date: {calculationGuessED.CreatedAt}");
+            Console.WriteLine($"Question: {calculationGuessED.FirstOperand} {Helper.GetOperationSymbol(calculationGuessED.Operation)} {calculationGuessED.SecondOperand} = {calculationGuessED.Result} \t / User guess: {calculationGuessED.UserGuess} \t/ Round Result: {calculationGuessED.RoundResult} / Elapsed Time: {calculationGuessED.timeElapsed:F3} / Difficulty: {calculationGuessED.Difficulty} / Date: {calculationGuessED.CreatedAt}");
 
         }
         Console.WriteLine("Press Enter to continue.");
